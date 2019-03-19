@@ -15,8 +15,8 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Header />
-        
+        <Header title={"aaa"}  footerColor={color.pink}/>
+        <Header title={"aaa"} theme={2} themeText={'#fff'} themeColor={'dark'}/>
       </View>
     );
   }
@@ -25,8 +25,5 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   }
 });
