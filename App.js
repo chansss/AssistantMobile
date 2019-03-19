@@ -16,6 +16,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <Header />
+        
       </View>
     );
   }

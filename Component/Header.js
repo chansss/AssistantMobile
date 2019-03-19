@@ -3,9 +3,11 @@ import {Platform, StyleSheet, Text, View,Dimensions,Image} from 'react-native';
 
 
 
-type Props = {};
+
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
+
+type Props = {};
 export default class Header extends Component<Props> {
     render() {
         return (
@@ -17,7 +19,7 @@ export default class Header extends Component<Props> {
                         </View>
                         <View style={styles.morebutton}>
                             <Image source={require('../System_img/search.png')} style={{height:29,width:29}}/>
-
+                            
                         </View>
                     </View>
                     <View style={styles.header_bottom}>
