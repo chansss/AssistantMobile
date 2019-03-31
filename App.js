@@ -7,17 +7,26 @@
  */
 
 import React, {Component} from 'react';
-import Header from './Component/Header'
+import HomePage from './Page/HomePage/HomePage'
 import {Platform, StyleSheet, Text, View} from 'react-native';
-
+import {Navigator} from 'react-native-deprecated-custom-components';
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Header title={"aaa"}  footerColor={color.pink}/>
-        <Header title={"aaa"} theme={2} themeText={'#fff'} themeColor={'dark'}/>
-      </View>
+        <Navigator
+            initialRoute={{component:HomePage}}
+            renderScene={
+                (route,navigator)=>
+                {
+                    let Component=route.component;
+                    if (route.component) {
+                        return <Component {...route.params} navigator={navigator} />
+                    }
+                }
+            }
+
+        />
     );
   }
 }

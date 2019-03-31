@@ -19,7 +19,10 @@ export default class Header extends Component<Props> {
             themeText : this.props.themeText==null?color.black_header:this.props.themeText,
             leftIcon : this.judgeIconleft(),
             rightIcon : this.judgeIconRight(),
-            footerColor : this.props.footerColor==null?'#fff':this.props.footerColor
+            footerColor : this.props.footerColor==null?'#fff':this.props.footerColor,
+            borderWidth:1.5,
+            navigator:this.props.navigator==null?null:this.props.navigator,
+            bottomHeight:this.props.height==null?0:this.props.height
         }
     }
 
@@ -30,29 +33,35 @@ export default class Header extends Component<Props> {
 
     render() {
         const container= {
-            height:height*0.18,
+            height:height*0.18+this.state.bottomHeight,
             backgroundColor: this.state.footerColor
         };
         const header_corner={
             width: width,
-            height:height*0.18,
+            flex:1,
+            height:height*0.18+this.state.bottomHeight,
             borderBottomLeftRadius:height*0.18*0.6,
             backgroundColor: this.state.themeColor,
+            borderBottomWidth:this.state.borderWidth,
+            borderLeftWidth:this.state.borderWidth,
+            borderColor:'#E7E4E9',
         };
         const header_top={
             flexDirection:'row',
-                flex:0.4,
-                top:height*0.045
+            height:height*0.18*0.3,
+            top:height*0.045
         };
 
         const header_bottom={
+            height:height*0.18*0.7,
             marginLeft:height*0.17*0.6+20,
         };
         const header_text={
             fontSize: 30,
-                fontWeight: 'bold',
-                color: this.state.themeText,
-                top:height*0.17*0.23
+            fontWeight: 'bold',
+            color: this.state.themeText,
+            top:height*0.17*0.23,
+            right:width*0.07
         };
 
         const backbutton={
@@ -67,18 +76,20 @@ export default class Header extends Component<Props> {
 
 
 
-
+        if(this.props.bottomRender==null){
         return (
             <View style={container}>
                 <View style={header_corner}>
                     <View style={header_top}>
                         <View style={backbutton}>
-                            <TouchableOpacity onPress={this.initial()} style={{height:29,width:29}}>
+                            <TouchableOpacity onPress={this.props.leftFunction==null?()=>this.touch():()=>this.props.leftFunction()} style={{height:29,width:29}}>
                                 <Image source={this.state.leftIcon} style={{height:29,width:29}}/>
                             </TouchableOpacity>
                         </View>
                         <View style={morebutton}>
-                            <Image source={this.state.rightIcon} style={{height:29,width:29}}/>
+                            <TouchableOpacity onPress={this.props.rightFunction==null?()=>this.touch():()=>this.props.rightFunction()} style={{height:29,width:29}}>
+                                <Image source={this.state.rightIcon} style={{height:29,width:29}}/>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={header_bottom}>
@@ -88,12 +99,42 @@ export default class Header extends Component<Props> {
                     </View>
                 </View>
             </View>
-        );
+        );}
+        else{
+            return(
+            <View style={container}>
+                <View style={header_corner}>
+                    <View style={header_top}>
+                        <View style={backbutton}>
+                            <TouchableOpacity onPress={this.props.leftFunction==null?()=>this.touch():()=>this.props.leftFunction()} style={{height:29,width:29}}>
+                                <Image source={this.state.leftIcon} style={{height:29,width:29}}/>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={morebutton}>
+                            <TouchableOpacity onPress={this.props.rightFunction==null?()=>this.touch():()=>this.props.rightFunction()} style={{height:29,width:29}}>
+                                <Image source={this.state.rightIcon} style={{height:29,width:29}}/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={header_bottom}>
+                        <Text style={header_text}>
+                            {this.state.title}
+                        </Text>
+                    </View>
+                    <View style={{height:this.state.bottomHeight,paddingLeft:60}}>
+                        {this.props.bottomRender}
+                    </View>
+                </View>
+            </View>)
+        }
     }
 
     //初始化标题栏颜色
     initial(){
+        this.setState({borderWidth:this.state.themeColor==='#fff'&&this.state.footerColor==='#fff'?1.5:0})
     }
+
+    touch(){};
 
 
     judgeIconleft(){

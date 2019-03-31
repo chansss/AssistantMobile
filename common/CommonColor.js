@@ -11,7 +11,7 @@ global.color = {
     black_header:'#241332',
     white_header:'#fff',
     gray:'#241332',
-    purple:'##8A56AC',
+    purple:'#8A56AC',
     pink:'#241332',
     green1:'#241332',
     green2:'#52912E',
@@ -23,3 +23,8 @@ global.color = {
     button_gray:'#998FA2',
 
  };
+
+global.size={
+    width:width,
+    height:height
+};
