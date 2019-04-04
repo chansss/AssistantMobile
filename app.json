@@ -1,4 +1,5 @@
 {
   "name": "XCZS",
-  "displayName": "XCZS"
+  "displayName": "XCZS",
+  "expo": { "sdkVersion": "32.0.0" }
 }

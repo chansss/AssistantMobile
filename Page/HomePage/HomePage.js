@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import Header from '../../Component/Header'
 import Card from '../../common/Card'
-import {Platform, StyleSheet, Text, View,Alert,Animated,FlatList} from 'react-native';
+import {Platform, StyleSheet, Text, View,Alert,Animated,FlatList,Image} from 'react-native';
 import {Projector} from 'teaset';
 import { CheckBox } from 'react-native-elements'
 import SliderPro from "../../Component/SliderPro";
@@ -21,7 +21,10 @@ export default class HomePage extends Component<Props> {
             navigator:this.props.navigator==null?null:this.props.navigator,
             height:new Animated.Value(0),
             index:0,
-            data:[]
+            data:[{value:'买一台Mac',startTime:'9:00',endTime:'11:30'},{value:'完成毕业设计',startTime:'12:00',endTime:'1:30'}],
+            topData:[{value:'Study',index:0}, {value:'Learn',index:1}, {value:'Home',index:2},{value:'Study',index:0}, {value:'Learn',index:1}, {value:'Home',index:2}],
+            checked:[],
+            total_length:0
         }
     }
 
@@ -36,7 +39,7 @@ export default class HomePage extends Component<Props> {
     }
 
     componentWillMount(): void {
-    }
+}
 
     _keyExtractor = (item, index) => item.value;
 
@@ -54,7 +57,7 @@ export default class HomePage extends Component<Props> {
                                 themeText={color.black_header}
                                 bottomRender={
                                     <FlatList
-                                        data={[{value:'Study',index:0}, {value:'Learn',index:1}, {value:'Home',index:2},{value:'Study',index:0}, {value:'Learn',index:1}, {value:'Home',index:2}]}
+                                        data={this.state.topData}
                                         renderItem={({item}) => <SliderPro
                                             func={(index)=>this.changeTab(index)}
                                             height={size.height*0.1}
@@ -68,26 +71,52 @@ export default class HomePage extends Component<Props> {
                                 height={55}
                             />
                         }
-                        data={[{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},{value:'123'},]}
-                        renderItem={({item})=>
-                            <View style={{height:50,width:size.width,margin:20,flexDirection:'row'}}>
+                        data={this.state.data}
+                        renderItem={({item,index})=>{
+                            var list = this.state.checked;
+                            list.push(false);
+
+                            return(<View style={{height:50,width:size.width,margin:20,flexDirection:'row'}}>
                                 <View style={{flex:0.2,justifyContent:'center',alignItems:'flex-end'}}>
                                     <CheckBox
-                                        checked={false}
-                                        iconType={'material'}
-                                        uncheckedIcon={'check-square-o'}
+                                        uncheckedIcon={<Image style={{top:1}} source={require('../../System_img/uncheck.png')} />}
+                                        checkedIcon={<Image style={{top:1}} source={require('../../System_img/check.png')} />}
+                                        checked={this.state.checked[index]}
+                                        onPress={() => this.changeState(index)}
                                     />
                                 </View>
-                                <View style={{flex:0.8,justifyContent:'center',alignItems:'flex-start'}}>
-                                    <Text>
-                                        {item.value}
+                                <View style={{flex:0.8,alignItems:'flex-start'}}>
+                                    <Text style={[this.changeText(this.state.checked[index]),{yu}]}>
+                                        {'\u00A0\u00A0\u00A0'+item.value+'\u00A0\u00A0\u00A0'}
+                                    </Text>
+                                    <Text style={{left:9.5,marginTop:15,color:'#998FA2'}}>
+                                        <Image style={{height:15,width:15}} source={require('../../System_img/icons-dark-time.png')}/>{'   '+item.startTime+' - '+item.endTime+'   '}
                                     </Text>
                                 </View>
-                            </View>
-                        }
+                            </View>)
+                        }}
                         ListFooterComponent={()=><Text>End</Text>}
                     />
             </View>);
+    }
+
+    changeState(number){
+        var list = this.state.checked;
+        list[number] = !list[number];
+        if(list[number]){
+
+        }else{
+
+        }
+        this.setState({checked: list})
+    }
+
+    changeText(bool){
+        if(bool){
+            return {textDecorationLine: 'line-through',color:'#D47FA6'}
+        }else{
+            return {color:'#241332'}
+        }
     }
 
     changeTab(index){
