@@ -10,9 +10,16 @@
     "expo": "^32.0.6",
     "react": "16.8.3",
     "react-native": "^0.57.1",
+    "react-native-calendars": "^1.32.0",
+    "react-native-datepicker": "^1.7.2",
     "react-native-deprecated-custom-components": "^0.1.2",
     "react-native-elements": "^1.1.0",
+    "react-native-linear-gradient": "^2.5.4",
+    "react-native-sqlite-storage": "^3.3.10",
+    "react-native-textinput-effects": "^0.5.1",
+    "react-native-touchable-scale": "^2.0.0",
     "react-native-vector-icons": "^6.4.2",
+    "rn-textinputlayout": "^1.0.5",
     "teaset": "^0.6.3"
   },
   "devDependencies": {

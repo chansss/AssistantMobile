@@ -28,3 +28,11 @@ global.size={
     width:width,
     height:height
 };
+
+global.colors=[
+    {name:'blue',color:'#4666E5'},
+    {name:'green',color:'#52912E'},
+    {name:'purple',color:'#8A56AC'},
+    {name:'pink',color:'#D47FA6'},
+    {name:'lightGreen',color:'#34FDD6'}
+]

@@ -13,6 +13,7 @@ export default class Header extends Component<Props> {
         super(Props);
         this.state = {
             //theme 选择颜色模式  控制初始图标颜色
+            //Color selector
             theme : this.props.theme==null?1:this.props.theme,
             themeColor : this.props.themeColor==null?color.white_header:this.judgeThemeColor(),
             title:this.props.title==null?'Header':this.props.title,
@@ -34,11 +35,11 @@ export default class Header extends Component<Props> {
     render() {
         const container= {
             height:height*0.18+this.state.bottomHeight,
+            width:width,
             backgroundColor: this.state.footerColor
         };
         const header_corner={
             width: width,
-            flex:1,
             height:height*0.18+this.state.bottomHeight,
             borderBottomLeftRadius:height*0.18*0.6,
             backgroundColor: this.state.themeColor,
@@ -51,7 +52,6 @@ export default class Header extends Component<Props> {
             height:height*0.18*0.3,
             top:height*0.045
         };
-
         const header_bottom={
             height:height*0.18*0.7,
             marginLeft:height*0.17*0.6+20,
@@ -161,7 +161,10 @@ export default class Header extends Component<Props> {
         }
         else if(this.props.rightIcon==null&&this.props.theme==2){
             return require('../System_img/icons-light-search.png')
-        }else{
+        }
+        else if(this.props.rightIcon == 'noIcon') {
+            return null;
+        }else {
             return this.props.rightIcon
         }
     }

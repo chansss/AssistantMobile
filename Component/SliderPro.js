@@ -25,7 +25,7 @@ export default class SliderPro extends Component<Props> {
             value={this.props.value}
             onPress={()=>this.props.func(this.props.index)}
             textStyle={{color:'#fff',fontSize:15}}
-            badgeStyle={{backgroundColor:color.purple,borderWidth:0,padding:15,borderRadius:25,top:10}}
+            badgeStyle={{backgroundColor:this.renderColor(this.props.color),borderWidth:0,height:27,paddingLeft:13,paddingRight:13,borderRadius:100,top:10}}
         />)
     }
 
@@ -43,6 +43,15 @@ export default class SliderPro extends Component<Props> {
                 </View>
             </View>
         );
+    }
+
+    renderColor(color){
+        var c = global.colors;
+        for(var i = 0;i<c.length;i++){
+            if(c[i].name == color){
+                return c[i].color
+            }
+        }
     }
 }
 

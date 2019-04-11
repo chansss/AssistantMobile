@@ -1,5 +1,8 @@
 {
   "name": "XCZS",
   "displayName": "XCZS",
-  "expo": { "sdkVersion": "32.0.0" }
+  "expo": { 
+    "sdkVersion": "32.0.0",
+    "appKey": "XCZS" 
+  }
 }

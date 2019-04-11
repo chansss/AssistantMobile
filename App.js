@@ -15,13 +15,17 @@ export default class App extends Component<Props> {
   render() {
     return (
         <Navigator
-            initialRoute={{component:HomePage}}
+            initialRoute={{name:'1',component:HomePage}}
+            configureScene={(route, routeStack) =>
+              Navigator.SceneConfigs.FloatFromRight
+              // Navigator.SceneConfigs.PushFromRight             <--- RN 提供的过渡动画
+          }
             renderScene={
                 (route,navigator)=>
                 {
                     let Component=route.component;
                     if (route.component) {
-                        return <Component {...route.params} navigator={navigator} />
+                        return <Component {...route.params}  navigator={navigator} />
                     }
                 }
             }
@@ -29,6 +33,9 @@ export default class App extends Component<Props> {
         />
     );
   }
+
+
+  
 }
 
 const styles = StyleSheet.create({
